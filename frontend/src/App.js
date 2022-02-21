@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import TransactionList from './components/TransactionList';
-import Provider from 'react-redux'
+import {Provider} from 'react-redux'
 import store from './store';
 
 function App() {
