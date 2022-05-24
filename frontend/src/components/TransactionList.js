@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getTransactions } from '../actions/transactionsActions'
+import { getTransactions, deleteTransaction } from '../actions/transactionsActions'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 
@@ -8,18 +8,30 @@ const TransactionList = (props) => {
     useEffect(() => {
         props.getTransactions()
     }, [])
-    
+
     const { transactions } = props.transaction
-    console.log(transactions)
-    
+
+    const onDeleteClick = (id) =>{
+        props.deleteTransaction(id)
+        console.log("been pressed")
+    }
+
     return (
         <>
-            <button>Register Transaction</button>
-            
-                {transactions.map(({ coin, date, units, pricePerUnit }) => { 
-                    <h1>h</h1>
+            <table>
+                {transactions.map(({id, coin, date, units, pricePerUnit }) => {
+                    return (
+                        <>
+                            <tr>
+                                <button onClick={onDeleteClick.bind(this, id)}>delete</button>
+                                <td>{coin}</td>
+                                <td>{date}</td>
+                                <td>{units}</td>
+                                <td>{pricePerUnit}</td>
+                            </tr>
+                        </>)
                 })}
-            
+            </table>
         </>
     )
 }
@@ -33,4 +45,4 @@ const mapStateToProps = (state) => (
     { transaction: state.transaction }
 )
 
-export default connect(mapStateToProps, { getTransactions })(TransactionList)
+export default connect(mapStateToProps, { getTransactions,deleteTransaction })(TransactionList)

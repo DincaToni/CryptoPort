@@ -1,17 +1,22 @@
+import { useState } from "react"
 import { connect } from "react-redux"
+import Modal from "./Modal"
 import { addTransaction } from "../actions/transactionsActions"
 
 const TransactionModal = () => {
+    const [modal, setModal] = useState(false)
 
-    state = {
-        modal: false,
-        name: ''
+    const toggleTrue = () => {
+        setModal(true)
     }
 
-    toggle = () => {
-        
-    }
+    return (
+        <>
+            <button onClick={toggleTrue}>Register Transaction</button>
+            {modal && <Modal activation={setModal}/>}
+        </>
+    )
 
 }
 
-export default connect(addTransaction)(TransactionModal)
+export default connect()(TransactionModal)
